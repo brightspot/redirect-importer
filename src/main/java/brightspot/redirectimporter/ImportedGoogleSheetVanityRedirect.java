@@ -1,4 +1,4 @@
-package brightspot.google.drive.conversion.vanityredirect;
+package brightspot.redirectimporter;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -18,6 +18,7 @@ import com.psddev.dari.db.Query;
 import com.psddev.dari.db.Record;
 import com.psddev.dari.db.State;
 import com.psddev.dari.util.ObjectUtils;
+import com.psddev.google.drive.GoogleDriveSyncable;
 import org.apache.commons.lang3.StringUtils;
 
 /**
@@ -71,26 +72,6 @@ public class ImportedGoogleSheetVanityRedirect extends AbstractImportedGoogleShe
             return records;
         }
 
-        GoogleSheetsFieldMapping parentMapping = GoogleSheetsFieldMapping.findMapping(
-                fieldMappings,
-                "parent");
-        VanityRedirect parentVanityRedirect = findVanityRedirect(parentMapping, recordsToPublish);
-        if (parentVanityRedirect == null) {
-            parentVanityRedirect = createVanityRedirect(parentMapping);
-            if (parentVanityRedirect != null) {
-                records.add(parentVanityRedirect);
-                vanityRedirect.setParent(parentVanityRedirect);
-            }
-        } else {
-            vanityRedirect.setParent(parentVanityRedirect);
-        }
-
-        Optional.ofNullable(GoogleSheetsFieldMapping.findMapping(fieldMappings, "description"))
-                .map(GoogleSheetsFieldMapping::getColumn)
-                .map(getCsvRecord()::get)
-                .filter(StringUtils::isNotBlank)
-                .ifPresent(vanityRedirect::setDescription);
-
         if (originalState != null) {
             Map<String, Map<String, Object>> diffMap = Draft.findDifferences(
                     Database.Static.getDefault().getEnvironment(),
@@ -134,7 +115,7 @@ public class ImportedGoogleSheetVanityRedirect extends AbstractImportedGoogleShe
                 .orElseGet(() -> recordsToPublish.stream()
                         .filter(VanityRedirect.class::isInstance)
                         .map(VanityRedirect.class::cast)
-                        .filter(s -> s.getDisplayName().equals(name))
+                        .filter(s -> s.getName().equals(name))
                         .findFirst()
                         .orElse(null));
     }
@@ -145,12 +126,11 @@ public class ImportedGoogleSheetVanityRedirect extends AbstractImportedGoogleShe
                 .map(getCsvRecord()::get)
                 .filter(StringUtils::isNotBlank)
                 .map(name -> ObjectUtils.build(new VanityRedirect(), vanityRedirect -> {
-                    vanityRedirect.setInternalName(name);
-                    vanityRedirect.setDisplayName(name);
-                    GoogleDriveVanityRedirectModification VanityRedirectModification = vanityRedirect.as(
+                    vanityRedirect.setName(name);
+                    GoogleDriveVanityRedirectModification vanityRedirectModification = vanityRedirect.as(
                             GoogleDriveVanityRedirectModification.class);
-                    VanityRedirectModification.setOriginalImportedGoogleSheetVanityRedirect(this);
-                    VanityRedirectModification.setImportKey(name);
+                    vanityRedirectModification.setOriginalImportedGoogleSheetVanityRedirect(this);
+                    vanityRedirectModification.setImportKey(name);
                 }))
                 .orElse(null);
     }

@@ -1,4 +1,4 @@
-package brightspot.google.drive.conversion.vanityredirect;
+package brightspot.redirectimporter;
 
 import java.util.Optional;
 import java.util.UUID;

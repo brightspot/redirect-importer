@@ -16,8 +16,7 @@ dependencies {
     api 'com.psddev:dari-util'
     api 'org.slf4j:slf4j-api'
 
-    api 'com.psddev:google-drive'
-    api 'com.brightspot.go:lib-model-google-drive'
-
+    api('com.brightspot.go:lib-model-google-drive:1.45-x77f279-883617') { force = true }
+    
     implementation 'org.zwobble.mammoth:mammoth:1.5.0'
 }

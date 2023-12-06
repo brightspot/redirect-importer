@@ -1,4 +1,4 @@
-package brightspot.google.drive.conversion.vanityredirect;
+package brightspot.redirectimporter;
 
 import com.psddev.cms.db.ToolUi;
 import com.psddev.dari.db.Modification;

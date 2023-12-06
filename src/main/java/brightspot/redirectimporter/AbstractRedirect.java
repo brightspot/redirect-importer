@@ -1,4 +1,4 @@
-package brightspot.google.drive.conversion.vanityredirect;
+package brightspot.redirectimporter;
 
 import java.net.MalformedURLException;
 import java.net.URL;

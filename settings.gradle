@@ -16,7 +16,7 @@ plugins {
     id 'com.brightspot.gradle' version '1.0.0-rc28'
 }
 
-rootProject.name = 'platform-extension-example'
+rootProject.name = 'redirect-importer'
 
 brightspot {
     projectGroup = 'com.brightspot'

@@ -48,6 +48,10 @@ public class VanityRedirectGoogleDriveFileConverter extends ExternalItemConverte
 
         List<CSVRecord> records = csvParser.getRecords();
 
+        if (records == null || records.size() == 0) {
+            return Collections.emptyList();
+        }
+
         for (CSVRecord csvRecord : records) {
 
             String localPath = csvRecord.get(0);

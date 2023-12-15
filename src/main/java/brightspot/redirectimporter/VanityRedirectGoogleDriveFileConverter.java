@@ -85,10 +85,10 @@ public class VanityRedirectGoogleDriveFileConverter extends ExternalItemConverte
         List<String> headers = new ArrayList<>(headerMap.keySet());
 
         if (!(headers.size() == 4
-            && headers.get(0).equalsIgnoreCase("local path")
-            && headers.get(1).equalsIgnoreCase("new url")
-            && headers.get(2).equalsIgnoreCase("status")
-            && headers.get(3).equalsIgnoreCase("query string"))) {
+            || headers.get(0).equalsIgnoreCase("local path")
+            || headers.get(1).equalsIgnoreCase("new url")
+            || headers.get(2).equalsIgnoreCase("status")
+            || headers.get(3).equalsIgnoreCase("query string"))) {
             throw new ExternalItemImportException("File contains incorrect header names or they are in the wrong order!");
         }
 

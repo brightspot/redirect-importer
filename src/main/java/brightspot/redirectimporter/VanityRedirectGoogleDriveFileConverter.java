@@ -19,6 +19,7 @@ import com.psddev.cms.db.ExternalItemConverter;
 import com.psddev.cms.db.ExternalItemImportException;
 import com.psddev.cms.db.Site;
 import com.psddev.cms.page.PageRequest;
+import com.psddev.cms.ui.ToolRequest;
 import com.psddev.dari.db.Query;
 import com.psddev.dari.web.WebRequest;
 import com.psddev.google.drive.GoogleDriveFile;
@@ -78,7 +79,7 @@ public class VanityRedirectGoogleDriveFileConverter extends ExternalItemConverte
             throw new ExternalItemImportException("File contains wrong number of columns!");
         }
 
-        Site site = WebRequest.getCurrent().as(PageRequest.class).getCurrentSite();
+        Site site = WebRequest.getCurrent().as(ToolRequest.class).getCurrentSite();
 
         if (site == null) {
             throw new IllegalStateException("An owner Site must be specified.");

@@ -16,6 +16,7 @@ import brightspot.redirectimporter.utils.DefaultImplementationSupplier;
 import brightspot.redirectimporter.utils.GoogleCSVUtils;
 import com.google.common.base.Throwables;
 import com.psddev.cms.db.ExternalItemConverter;
+import com.psddev.cms.db.ExternalItemImportException;
 import com.psddev.cms.db.Site;
 import com.psddev.cms.page.PageRequest;
 import com.psddev.dari.db.Query;
@@ -64,8 +65,17 @@ public class VanityRedirectGoogleDriveFileConverter extends ExternalItemConverte
 
         List<CSVRecord> records = csvParser.getRecords();
 
-        if (records == null || records.size() == 0) {
-            return Collections.emptyList();
+        if (records == null) {
+            throw new ExternalItemImportException("File does not exist!");
+        }
+
+        if (records.size() == 0) {
+            throw new ExternalItemImportException("File contains no records!");
+        }
+
+        // We can look at the first row to determine if the column size is wrong (not 4 columns)
+        if (records.get(0).size() != 4) {
+            throw new ExternalItemImportException("File contains wrong number of columns!");
         }
 
         Site site = WebRequest.getCurrent().as(PageRequest.class).getCurrentSite();

@@ -107,11 +107,7 @@ public class VanityRedirectGoogleDriveFileConverter extends ExternalItemConverte
             String queryString = csvRecord.get(3);
 
             // Attempt to find existing vanity redirect local path that is identical to the current rows local path
-            String localPathQuery = csvRecord.get(0);
-            if (!(localPath.startsWith("/"))) {
-                localPathQuery = "/" + localPath;
-            }
-            VanityRedirect existingVanityRedirect = Query.from(VanityRedirect.class).where("localUrls = ?", localPathQuery).first();
+            VanityRedirect existingVanityRedirect = Query.from(VanityRedirect.class).where("localUrls = ?", "/" + localPath).first();
 
             String existingVanityRedirectLocalPath = "";
 

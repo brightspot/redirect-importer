@@ -18,7 +18,6 @@ import com.google.common.base.Throwables;
 import com.psddev.cms.db.ExternalItemConverter;
 import com.psddev.cms.db.ExternalItemImportException;
 import com.psddev.cms.db.Site;
-import com.psddev.cms.page.PageRequest;
 import com.psddev.cms.ui.ToolRequest;
 import com.psddev.dari.db.Query;
 import com.psddev.dari.web.WebRequest;

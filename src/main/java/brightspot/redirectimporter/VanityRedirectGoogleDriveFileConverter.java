@@ -4,9 +4,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.Objects;
+import java.util.TreeMap;
 
 import brightspot.redirect.QueryStringOption;
 import brightspot.redirect.QueryStringOptionModify;
@@ -76,6 +79,19 @@ public class VanityRedirectGoogleDriveFileConverter extends ExternalItemConverte
         // We can look at the first row to determine if the column size is wrong (not 4 columns)
         if (records.get(0).size() != 4) {
             throw new ExternalItemImportException("File contains wrong number of columns!");
+        }
+
+        final Map<String, Integer> headerMap = records.get(0).getParser().getHeaderMap();
+
+        // Check if the record names are correct, ignoring case
+        List<String> headers = new ArrayList<>(headerMap.keySet());
+
+        if (headers.size() == 4
+            && headers.get(0).equalsIgnoreCase("local path")
+            && headers.get(1).equalsIgnoreCase("new url")
+            && headers.get(2).equalsIgnoreCase("status")
+            && headers.get(3).equalsIgnoreCase("query string")) {
+            throw new ExternalItemImportException("File contains incorrect header names or they are in the wrong order!");
         }
 
         Site site = WebRequest.getCurrent().as(ToolRequest.class).getCurrentSite();

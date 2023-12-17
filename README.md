@@ -31,14 +31,14 @@ This extension requires an instance of [Brightspot](https://www.brightspot.com/)
 
 Gradle:
 ```groovy
-api 'com.brightspot:platform-extension-example:1.0.0'
+api 'com.brightspot:redirect-importer'
 ```
 
 Maven:
 ```xml
 <dependency>
     <groupId>com.brightspot</groupId>
-    <artifactId>platform-extension-example</artifactId>
+    <artifactId>redirect-importer</artifactId>
     <version>1.0.0</version>
 </dependency>
 ```

@@ -1,13 +1,6 @@
-> [!WARNING]
-> This README is a template for new Platform Extensions.
-> Notes in this format are instructions for you, the author, and must be deleted before the project is complete.
+# Redirect Importer
 
-# Example
-
-> [!WARNING]
-> This is a high-level summary of the functionality this extension provides.
-
-This extension provides the ability for Brightspot to print the words "Hello World" to the log when certain records are saved.
+This extension provides the ability for Brightspot to import Vanity Redirects utilizing a google spreadsheet. 
 
 * [Prerequisites](#prerequisites)
 * [Installation](#installation)
@@ -20,25 +13,20 @@ This extension provides the ability for Brightspot to print the words "Hello Wor
 
 ## Prerequisites
 
-> [!WARNING]
-> This section should list any prerequisites that must be met before the extension can be installed or used. 
-> If a specific version of Brightspot is needed, it should be listed here.
-> If any external APIs are used (AWS, GCP, or any other third party service), they should be listed here.
-
 This extension requires an instance of [Brightspot](https://www.brightspot.com/) and access to the project source code.
 
 ## Installation
 
 Gradle:
 ```groovy
-api 'com.brightspot:platform-extension-example:1.0.0'
+api 'com.brightspot:redirect-importer'
 ```
 
 Maven:
 ```xml
 <dependency>
     <groupId>com.brightspot</groupId>
-    <artifactId>platform-extension-example</artifactId>
+    <artifactId>redirect-importer</artifactId>
     <version>1.0.0</version>
 </dependency>
 ```
@@ -46,24 +34,11 @@ Maven:
 Substitute `1.0.0` for the desired version found on the [releases](/releases) list.
 
 ## Usage
-
-> [!WARNING]
-> This section describes how a developer would use this extension in their project.
-> It should include code samples, if applicable, as well as a link to the end user documentation. 
-
-To opt in to this behavior, implement the `SaysHelloWorld` interface on your content type:
-
-```java
-public class MyContentType extends Content implements SaysHelloWorld {
-    // ...
-}
-```
-
-Now, when a `MyContentType` record is saved, the words "Hello World" will be printed to the log.
+To opt in to this behavior, you just need to utilize the dependency. See [Installation](#installation).
 
 ## Documentation
 
-- [Javadocs](https://artifactory.psdops.com/public/com/brightspot/platform-extension-example/%5BRELEASE%5D/platform-extension-example-%5BRELEASE%5D-javadoc.jar!/index.html)
+- TBA
 
 ## Versioning
 
@@ -97,7 +72,7 @@ Then, add the following to your project's `build.gradle` file:
 
 ```groovy
 dependencies {
-    api 'com.brightspot:platform-extension-example:1.0.0-SNAPSHOT'
+    api 'com.brightspot:redirect-importer'
 }
 ```
 

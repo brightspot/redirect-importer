@@ -5,6 +5,7 @@
 > This is a high-level summary of the functionality this extension provides.
 
 This extension provides the ability for Brightspot to import Vanity Redirects utilizing a google spreadsheet. 
+
 * [Prerequisites](#prerequisites)
 * [Installation](#installation)
 * [Usage](#usage)
@@ -15,11 +16,6 @@ This extension provides the ability for Brightspot to import Vanity Redirects ut
 * [License](#license)
 
 ## Prerequisites
-
-> [!WARNING]
-> This section should list any prerequisites that must be met before the extension can be installed or used. 
-> If a specific version of Brightspot is needed, it should be listed here.
-> If any external APIs are used (AWS, GCP, or any other third party service), they should be listed here.
 
 This extension requires an instance of [Brightspot](https://www.brightspot.com/) and access to the project source code.
 

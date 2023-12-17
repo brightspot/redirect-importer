@@ -28,6 +28,7 @@ import org.apache.commons.csv.CSVRecord;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/** The VanityRedirectGoogleDriveFileConverter is used to retrieve a spreadsheet with specific columns to import Vanity Redirects. */
 public class VanityRedirectGoogleDriveFileConverter extends ExternalItemConverter<GoogleDriveFile, VanityRedirect> {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(VanityRedirectGoogleDriveFileConverter.class);
@@ -43,6 +44,12 @@ public class VanityRedirectGoogleDriveFileConverter extends ExternalItemConverte
         this.overwriteExistingRedirects = overwriteExistingRedirects;
     }
 
+    /**
+     * Calls method {@link #extractRedirects(GoogleDriveFile)} if mime type of source is a spreadsheet.
+     *
+     * @param  source  a file in google drive
+     * @return a collection of Vanity Redirects
+     */
     @Override
     public Collection<? extends VanityRedirect> convert(GoogleDriveFile source) {
         try {
@@ -57,6 +64,13 @@ public class VanityRedirectGoogleDriveFileConverter extends ExternalItemConverte
         return Collections.emptyList();
     }
 
+    /**
+     * Used to convert spreadsheet data to vanity redirects in the cms.
+     * Calls method {@link #setVanityRedirectValues(VanityRedirect, String, String, String, String, Site)} if certain conditions are met.
+     * @param  source  a file in google drive
+     * @return      a collection of Vanity Redirects
+     * @see         VanityRedirect
+     */
     private Collection<VanityRedirect> extractRedirects(GoogleDriveFile source) throws IOException {
 
         Collection<VanityRedirect> result = new ArrayList<>();
@@ -138,6 +152,18 @@ public class VanityRedirectGoogleDriveFileConverter extends ExternalItemConverte
         return result;
     }
 
+    /**
+     * Used to set values in the Vanity Redirect object.
+     *
+     * @param  vanityRedirect a vanityRedirect object
+     * @param  localPath a local url
+     * @param  newUrl local url will now be modified to this
+     * @param  status status, 301 or 302
+     * @param  queryString preserve, ignore, or modify
+     * @param  site the current site
+     * @return      a Vanity Redirect
+     * @see         VanityRedirect
+     */
     public VanityRedirect setVanityRedirectValues(VanityRedirect vanityRedirect, String localPath, String newUrl, String status, String queryString, Site site) {
 
         vanityRedirect.as(Site.ObjectModification.class).setOwner(site);

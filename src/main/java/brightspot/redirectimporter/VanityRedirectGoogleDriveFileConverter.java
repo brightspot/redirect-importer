@@ -107,7 +107,8 @@ public class VanityRedirectGoogleDriveFileConverter extends ExternalItemConverte
             String queryString = csvRecord.get(3);
 
             // Attempt to find existing vanity redirect local path that is identical to the current rows local path
-            VanityRedirect existingVanityRedirect = Query.from(VanityRedirect.class).where("localUrls = ?", "/" + localPath).first();
+            Query<VanityRedirect> existingVanityRedirectQuery = Query.from(VanityRedirect.class).where("localUrls = ?", "/" + localPath).and("cms.site.owner = ?", site);
+            VanityRedirect existingVanityRedirect = existingVanityRedirectQuery.first();
 
             String existingVanityRedirectLocalPath = "";
 
@@ -122,7 +123,7 @@ public class VanityRedirectGoogleDriveFileConverter extends ExternalItemConverte
                 result.add(vanityRedirect);
 
             } else if (existingVanityRedirect.getLocalUrls().size() == 1
-               && Objects.equals(localPath, existingVanityRedirectLocalPath)
+               && Objects.equals("/" + localPath, existingVanityRedirectLocalPath)
                && isOverwriteExistingRedirects()) {
 
                 // If existing vanity redirect local url exists, and overwrite existing redirects boolean is checked,

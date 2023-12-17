@@ -1,6 +1,6 @@
 > This README is a template for Redirect Importer functionality.
 
-# Example
+# Redirect Importer
 
 > This is a high-level summary of the functionality this extension provides.
 

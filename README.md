@@ -1,8 +1,4 @@
-> This README is a template for Redirect Importer functionality.
-
 # Redirect Importer
-
-> This is a high-level summary of the functionality this extension provides.
 
 This extension provides the ability for Brightspot to import Vanity Redirects utilizing a google spreadsheet. 
 

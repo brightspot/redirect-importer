@@ -10,6 +10,7 @@ import java.util.Map;
 import java.util.Objects;
 
 import brightspot.redirect.QueryStringOption;
+import brightspot.redirect.QueryStringOptionIgnore;
 import brightspot.redirect.QueryStringOptionModify;
 import brightspot.redirect.QueryStringOptionPreserve;
 import brightspot.redirect.VanityRedirect;
@@ -187,7 +188,7 @@ public class VanityRedirectGoogleDriveFileConverter extends ExternalItemConverte
         } else {
                 vanityRedirect.setQueryString(DefaultImplementationSupplier.createDefault(
                         QueryStringOption.class,
-                        QueryStringOptionPreserve.class));
+                        QueryStringOptionIgnore.class));
         }
         return vanityRedirect;
 

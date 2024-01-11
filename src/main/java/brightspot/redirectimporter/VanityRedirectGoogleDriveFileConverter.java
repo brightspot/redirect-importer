@@ -146,7 +146,7 @@ public class VanityRedirectGoogleDriveFileConverter extends ExternalItemConverte
                 result.add(existingVanityRedirect);
 
             } else {
-                throw new ExternalItemImportException("You did not overwrite existing redirects, nor is there any new vanity redirect!");
+                throw new ExternalItemImportException("You either did not overwrite existing redirects, nor there any no vanity redirects!");
             }
         }
 
@@ -188,6 +188,8 @@ public class VanityRedirectGoogleDriveFileConverter extends ExternalItemConverte
             vanityRedirect.setQueryString(DefaultImplementationSupplier.createDefault(
                     QueryStringOption.class,
                     QueryStringOptionModify.class));
+        } else {
+            vanityRedirect.setQueryString(null);
         }
 
         return vanityRedirect;

@@ -180,18 +180,15 @@ public class VanityRedirectGoogleDriveFileConverter extends ExternalItemConverte
             vanityRedirect.setQueryString(DefaultImplementationSupplier.createDefault(
                     QueryStringOption.class,
                     QueryStringOptionPreserve.class));
-        } else if (queryString.equalsIgnoreCase("ignore")) {
-            vanityRedirect.setQueryString(DefaultImplementationSupplier.createDefault(
-                    QueryStringOption.class,
-                    QueryStringOptionPreserve.class));
         } else if (queryString.equalsIgnoreCase("modify")) {
             vanityRedirect.setQueryString(DefaultImplementationSupplier.createDefault(
                     QueryStringOption.class,
                     QueryStringOptionModify.class));
         } else {
-            vanityRedirect.setQueryString(null);
+                vanityRedirect.setQueryString(DefaultImplementationSupplier.createDefault(
+                        QueryStringOption.class,
+                        QueryStringOptionPreserve.class));
         }
-
         return vanityRedirect;
 
     }

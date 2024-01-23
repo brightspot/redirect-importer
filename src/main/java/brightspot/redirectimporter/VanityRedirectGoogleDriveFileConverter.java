@@ -147,6 +147,7 @@ public class VanityRedirectGoogleDriveFileConverter extends ExternalItemConverte
                 result.add(existingVanityRedirect);
 
             } else {
+                // Don't overwrite any values
                 result.add(existingVanityRedirect);
             }
         }

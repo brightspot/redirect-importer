@@ -146,10 +146,12 @@ public class VanityRedirectGoogleDriveFileConverter extends ExternalItemConverte
                 existingVanityRedirect = setVanityRedirectValues(existingVanityRedirect, localPath, newUrl, status, queryString, site);
                 result.add(existingVanityRedirect);
 
-            } else {
-                // Don't overwrite any values
-                result.add(existingVanityRedirect);
             }
+        }
+
+        if (result.size() == 0) {
+            throw new ExternalItemImportException("Please check that you have selected the correct toggle, " +
+                    "and/or that there are any existing and/or new vanity redirects.");
         }
 
         // Return redirects

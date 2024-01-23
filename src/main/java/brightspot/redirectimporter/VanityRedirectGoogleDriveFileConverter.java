@@ -144,7 +144,7 @@ public class VanityRedirectGoogleDriveFileConverter extends ExternalItemConverte
                 // If existing vanity redirect local url exists, and overwrite existing redirects boolean is checked,
                 // replace instead of creating a new one
                 existingVanityRedirect = setVanityRedirectValues(existingVanityRedirect, localPath, newUrl, status, queryString, site);
-                existingVanityRedirect.saveImmediately();
+                result.add(existingVanityRedirect);
 
             } else {
                 throw new ExternalItemImportException("You either did not overwrite existing redirects, nor are there any vanity redirects!");

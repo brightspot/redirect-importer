@@ -147,7 +147,7 @@ public class VanityRedirectGoogleDriveFileConverter extends ExternalItemConverte
                 result.add(existingVanityRedirect);
 
             } else {
-                throw new ExternalItemImportException("You either did not overwrite existing redirects, nor there any no vanity redirects!");
+                throw new ExternalItemImportException("You either did not overwrite existing redirects, nor are there any vanity redirects!");
             }
         }
 

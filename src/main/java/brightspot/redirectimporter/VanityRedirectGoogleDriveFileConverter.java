@@ -138,7 +138,7 @@ public class VanityRedirectGoogleDriveFileConverter extends ExternalItemConverte
                 result.add(vanityRedirect);
 
             } else if (existingVanityRedirect.getLocalUrls().size() == 1
-               && Objects.equals("/" + localPath, existingVanityRedirectLocalPath)
+               && Objects.equals(localPath, existingVanityRedirectLocalPath)
                && isOverwriteExistingRedirects()) {
 
                 // If existing vanity redirect local url exists, and overwrite existing redirects boolean is checked,

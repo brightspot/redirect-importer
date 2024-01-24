@@ -34,12 +34,14 @@ Maven:
 Substitute `1.0.0` for the desired version found on the [releases](/releases) list.
 
 ## Usage
-To opt in to this behavior, you just need to utilize the dependency. See [Installation](#installation).
+To opt in to this behavior, you need to utilize the dependency. See [Installation](#installation). See [Documentation](#documentation) for CMS set up.
 
 ## Documentation
 
 - [Video Demo](https://www.brightspot.com/documentation/brightspot-cms-user-guide/redirect-importer-demo)
 - [User Guide](https://www.brightspot.com/documentation/brightspot-cms-user-guide/redirect-importer)
+- [Configuring the Google Drive integration](https://www.brightspot.com/documentation/brightspot-integrations-guide/latest/google-drive)
+- [Authenticating with Google Drive](https://www.brightspot.com/documentation/brightspot-integrations-guide/configuring-the-google-drive-integration)
 - [Javadocs](https://artifactory.psdops.com/public/com/brightspot/redirect-importer/%5BRELEASE%5D/redirect-importer-%5BRELEASE%5D-javadoc.jar!/index.html)
 
 ## Versioning

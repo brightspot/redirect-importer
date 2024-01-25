@@ -19,7 +19,7 @@ This extension requires an instance of [Brightspot](https://www.brightspot.com/)
 
 Gradle:
 ```groovy
-api 'com.brightspot:redirect-importer'
+api 'com.brightspot:redirect-importer:1.0.0'
 ```
 
 Maven:
@@ -34,11 +34,15 @@ Maven:
 Substitute `1.0.0` for the desired version found on the [releases](/releases) list.
 
 ## Usage
-To opt in to this behavior, you just need to utilize the dependency. See [Installation](#installation).
+To opt in to this behavior, you need to utilize the dependency. See [Installation](#installation). See [Documentation](#documentation) for CMS set up.
 
 ## Documentation
 
-- TBA
+- [Video Demo](https://www.brightspot.com/documentation/brightspot-cms-user-guide/redirect-importer-demo)
+- [User Guide](https://www.brightspot.com/documentation/brightspot-cms-user-guide/redirect-importer)
+- [Configuring the Google Drive integration](https://www.brightspot.com/documentation/brightspot-integrations-guide/latest/google-drive)
+- [Authenticating with Google Drive](https://www.brightspot.com/documentation/brightspot-integrations-guide/configuring-the-google-drive-integration)
+- [Javadocs](https://artifactory.psdops.com/public/com/brightspot/redirect-importer/%5BRELEASE%5D/redirect-importer-%5BRELEASE%5D-javadoc.jar!/index.html)
 
 ## Versioning
 
@@ -46,7 +50,7 @@ The version numbers for this extension will strictly follow [Semantic Versioning
 
 ## Contributing
 
-If you have feedback, suggestions or comments on this open-source platform extension, please feel free to make them publicly on the issues tab [here](https://github.com/brightspot/content-review-cycle/issues).
+If you have feedback, suggestions or comments on this open-source platform extension, please feel free to make them publicly on the issues tab [here](https://github.com/brightspot/redirect-importer/issues).
 
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
@@ -72,7 +76,7 @@ Then, add the following to your project's `build.gradle` file:
 
 ```groovy
 dependencies {
-    api 'com.brightspot:redirect-importer'
+    api 'com.brightspot:redirect-importer:1.0.0-SNAPSHOT'
 }
 ```
 

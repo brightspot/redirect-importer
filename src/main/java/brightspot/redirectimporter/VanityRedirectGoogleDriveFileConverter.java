@@ -151,8 +151,8 @@ public class VanityRedirectGoogleDriveFileConverter extends ExternalItemConverte
         }
 
         if (result.size() == 0) {
-            throw new ExternalItemImportException("Please check that you have selected the correct toggle, " +
-                    "and/or that there are any existing and/or new vanity redirects.");
+            throw new ExternalItemImportException("Please check that you have selected the correct toggle, "
+                    + "and/or that there are any existing and/or new vanity redirects.");
         }
 
         // Return redirects

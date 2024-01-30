@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 import brightspot.redirect.QueryStringOption;
 import brightspot.redirect.QueryStringOptionIgnore;
@@ -77,7 +78,7 @@ public class VanityRedirectGoogleDriveFileConverter extends ExternalItemConverte
         Collection<VanityRedirect> result = new ArrayList<>();
 
         // Extract redirects from the spreadsheet using csv
-        CSVParser csvParser = GoogleCSVUtils.getCsv(source, true);
+        CSVParser csvParser = GoogleCSVUtils.getCsv(source);
 
         List<CSVRecord> records = csvParser.getRecords();
 
@@ -97,14 +98,24 @@ public class VanityRedirectGoogleDriveFileConverter extends ExternalItemConverte
         final Map<String, Integer> headerMap = records.get(0).getParser().getHeaderMap();
 
         // Check if the record names are correct, ignoring case
-        List<String> headers = new ArrayList<>(headerMap.keySet());
+        List<String> headers = headerMap.keySet().stream()
+                .map(String::toLowerCase)
+                .collect(Collectors.toList());
+
+        // Case-insensitive header names
+        String localPathHeader = "local path";
+        String newUrlHeader = "new url";
+        String statusHeader = "status";
+        String queryStringHeader = "query string";
 
         if (!(headers.size() == 4
-            || headers.get(0).equalsIgnoreCase("local path")
-            || headers.get(1).equalsIgnoreCase("new url")
-            || headers.get(2).equalsIgnoreCase("status")
-            || headers.get(3).equalsIgnoreCase("query string"))) {
-            throw new ExternalItemImportException("File contains incorrect header names or they are in the wrong order!");
+                && headers.contains(localPathHeader)
+                && headers.contains(newUrlHeader)
+                && headers.contains(statusHeader)
+                && headers.contains(queryStringHeader))
+        ) {
+            throw new ExternalItemImportException("File must contain 4 headers with names: Local Path, New URL, "
+                    + "Status, and Query String!");
         }
 
         Site site = WebRequest.getCurrent().as(ToolRequest.class).getCurrentSite();
@@ -116,19 +127,26 @@ public class VanityRedirectGoogleDriveFileConverter extends ExternalItemConverte
         // Iterating over spreadsheet rows
         for (CSVRecord csvRecord : records) {
 
-            String localPath = csvRecord.get(0);
-            String newUrl = csvRecord.get(1);
-            String status = csvRecord.get(2);
-            String queryString = csvRecord.get(3);
+            String localPath = csvRecord.get(localPathHeader);
+            String newUrl = csvRecord.get(newUrlHeader);
+            String status = csvRecord.get(statusHeader);
+            String queryString = csvRecord.get(queryStringHeader);
 
             // Attempt to find existing vanity redirect local path that is identical to the current rows local path
-            Query<VanityRedirect> existingVanityRedirectQuery = Query.from(VanityRedirect.class).where("localUrls = ?", localPath).and("cms.site.owner = ?", site);
+            Query<VanityRedirect> existingVanityRedirectQuery = Query.from(VanityRedirect.class)
+                    .where("localUrls = ?", localPath)
+                    .and("cms.site.owner = ?", site);
+
             VanityRedirect existingVanityRedirect = existingVanityRedirectQuery.first();
 
             String existingVanityRedirectLocalPath = "";
 
             if (existingVanityRedirect != null) {
-                existingVanityRedirectLocalPath = existingVanityRedirect.getLocalUrls().stream().findFirst().orElse(null);
+                existingVanityRedirectLocalPath = existingVanityRedirect
+                        .getLocalUrls()
+                        .stream()
+                        .findFirst()
+                        .orElse(null);
             }
 
             if (existingVanityRedirect == null) {
@@ -144,7 +162,14 @@ public class VanityRedirectGoogleDriveFileConverter extends ExternalItemConverte
                 // If existing vanity redirect local url exists, and overwrite existing redirects boolean is checked,
                 // replace instead of creating a new one
                 existingVanityRedirect.setName(null);
-                existingVanityRedirect = setVanityRedirectValues(existingVanityRedirect, localPath, newUrl, status, queryString, site);
+                existingVanityRedirect = setVanityRedirectValues(
+                        existingVanityRedirect,
+                        localPath,
+                        newUrl,
+                        status,
+                        queryString,
+                        site
+                );
                 result.add(existingVanityRedirect);
 
             }
@@ -171,7 +196,13 @@ public class VanityRedirectGoogleDriveFileConverter extends ExternalItemConverte
      * @return      a Vanity Redirect
      * @see         VanityRedirect
      */
-    public VanityRedirect setVanityRedirectValues(VanityRedirect vanityRedirect, String localPath, String newUrl, String status, String queryString, Site site) {
+    public VanityRedirect setVanityRedirectValues(
+            VanityRedirect vanityRedirect,
+            String localPath,
+            String newUrl,
+            String status,
+            String queryString,
+            Site site) {
 
         vanityRedirect.as(Site.ObjectModification.class).setOwner(site);
         vanityRedirect.setLocalUrls(Collections.singleton(localPath));

@@ -34,22 +34,24 @@ public class GoogleCSVUtils {
 
     /**
      * @param file Google drive file.
-     * @param hasHeader Whether the file has a header.
      * Reads in the given <code>file</code> as {@link CSVParser}, either with the first record as the header row or with a
      * {@link #generateDefaultHeaderRow} based on whether <code>hasHeader</code> exists.
      *
      * @param file Can't be null.
      */
-    public static CSVParser getCsv(GoogleDriveFile file, boolean hasHeader) {
+    public static CSVParser getCsv(GoogleDriveFile file) {
         try (InputStream input = getFiles(file.getAccountAccess())
                 .export(file.getFileId(), "text/csv")
                 .executeMediaAsInputStream()) {
 
             return CSVParser.parse(
                     IoUtils.toString(input, StandardCharsets.UTF_8),
-                    hasHeader
-                            ? CSVFormat.DEFAULT.withAllowMissingColumnNames().withFirstRecordAsHeader()
-                            : CSVFormat.DEFAULT.withHeader(generateDefaultHeaderRow(file).toArray(new String[0])));
+                    CSVFormat
+                            .DEFAULT
+                            .withFirstRecordAsHeader()
+                            .withIgnoreHeaderCase(true)
+                            .withIgnoreSurroundingSpaces(true)
+            );
 
         } catch (IOException error) {
             throw new RuntimeException(
@@ -106,7 +108,7 @@ public class GoogleCSVUtils {
     }
 
     public static List<String> getHeaderRow(GoogleDriveFile file) {
-        return getCsv(file, true).getHeaderNames();
+        return getCsv(file).getHeaderNames();
     }
 
     private static List<String> generateDefaultHeaderRow(GoogleDriveFile file) {

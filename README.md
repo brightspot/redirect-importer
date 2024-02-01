@@ -15,6 +15,11 @@ This extension provides the ability for Brightspot to import Vanity Redirects ut
 
 This extension requires an instance of [Brightspot](https://www.brightspot.com/) and access to the project source code.
 
+The instance of Brightspot should have the following versions:
+
+Brightspot: 4.5.15.8 or higher
+Java: 8 or higher
+
 ## Installation
 
 Gradle:

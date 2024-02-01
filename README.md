@@ -17,7 +17,8 @@ This extension requires an instance of [Brightspot](https://www.brightspot.com/)
 
 The instance of Brightspot should have the following versions:
 
-Brightspot: 4.5.15.8 or higher
+Brightspot: 4.5.15.8 or higher  
+
 Java: 8 or higher
 
 ## Installation

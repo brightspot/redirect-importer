@@ -87,7 +87,3 @@ dependencies {
 ```
 
 Finally, compile your project and run your local Brightspot instance.
-
-## License
-
-See: [LICENSE](LICENSE).

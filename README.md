@@ -39,7 +39,7 @@ Maven:
 Substitute `1.0.0` for the desired version found on the [releases](/releases) list.
 
 ## Usage
-To opt in to this behavior, you need to utilize the dependency. See [Installation](#installation). See [Documentation](#documentation) for CMS set up.
+No specific instructions needed
 
 ## Documentation
 
@@ -51,7 +51,7 @@ To opt in to this behavior, you need to utilize the dependency. See [Installatio
 
 ## Versioning
 
-The version numbers for this extension will strictly follow [Semantic Versioning](https://semver.org/).
+The version numbers for this extension will strictly follow [Semantic Versioning](https://semver.org/). The latest release can be found here. <----Max, please add repo link
 
 ## Contributing
 

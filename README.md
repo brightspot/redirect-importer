@@ -37,7 +37,7 @@ Maven:
 </dependency>
 ```
 
-Substitute `1.0.0` for the desired version found on the [releases](/releases) list.
+Substitute `1.0.0` for the desired version found on the [releases](https://github.com/brightspot/redirect-importer/tags) page.
 
 ## Usage
 No specific instructions needed
